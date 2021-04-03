@@ -1,14 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="uk-background-muted" lang="en">
 
 <head>
- <meta charset="UTF-8" />
- <title>Avatheeers</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- UIkit CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/css/uikit.min.css" />
+  <!-- UIkit JS -->
+  <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/js/uikit.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/js/uikit-icons.min.js"></script>
+
+  <style>
+    .inventory-list {
+      display: grid;
+      grid-gap: 30px;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .uk-notification-message {
+      background: #222;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    .fade {
+      opacity: 0.7;
+    }
+  </style>
+  <title>Avatheeer</title>
 </head>
 
 <body>
- <script src="./main.js"></script>
+  <!-- Loading -->
+  <div id="loading-container">
+    <div uk-spinner="ratio: 3" class="uk-position-center"></div>
+  </div>
+
+  <!-- Welcome -->
+  <div id="welcome-container" class="uk-position-center hidden">
+    <h1 class="uk-heading-medium uk-text-center">Welcome!</h1>
+    <h3 id="start-message" class="uk-text-center">Please connect your metamask
+      account to begin.</h3>
+    <img src="./images/metamask.svg" class="uk-align-center" />
+    <button id="connect-button" class="uk-button uk-button-primary uk-align-center">Connect</button>
+  </div>
+
+  <!-- Main  -->
+  <div id="main-container" class="uk-container uk-container-small uk-padding-large hidden">
+    <!-- Header -->
+    <h1 class="uk-heading-small uk-text-center uk-text-bold ">avatheeer</h1>
+
+    <!-- Navigation -->
+    <ul class="uk-flex-center" uk-tab="animation: uk-animation-fade">
+      <li class="uk-active"><a href="#">Create new</a></li>
+      <li><a id="inventory-tab" href="#">Inventory</a></li>
+    </ul>
+
+    <ul class="uk-switcher uk-margin">
+      <!-- Create section -->
+      <li class="uk-active">
+        <h2 class="uk-text-center">Create new Avatheeer</h2>
+
+        <img class="uk-align-center" id="avatheeer-container" height="350" width="350" src="./images/placeholder.png" />
+
+        <form class="uk-margin uk-text-center" uk-margin>
+          <input class="uk-input uk-form-width-medium" type="text" id="create-input" maxlength="20"
+            placeholder="Enter name...">
+          <button class="uk-button uk-button-primary" id="create-button">Create</button>
+        </form>
+      </li>
+
+      <!-- Inventory section -->
+      <li>
+        <h2 class="uk-text-center">Your inventory</h2>
+        <!-- Pizza containers will be appended to this div -->
+        <div id="inventory-container" class="inventory-list">
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <script src="main.js"></script>
 </body>
 
 </html>
-
